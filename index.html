@@ -34,9 +34,20 @@
 
   <script>
     const triggers = document.querySelectorAll('a');
+    const navItems = document.querySelectorAll('.menu a') // grabs menu items only instead of all <a> // 
+
+    // creates the span element that we will use as a highlight and adds it to the HTML body //
     const highlight = document.createElement('span');
     highlight.classList.add('highlight');
     document.body.appendChild(highlight);
+
+    // drop down menu //
+    const dropdown = document.createElement('ul');
+    dropdown.classList.add('dropdown');
+    const dropdownItem = document.createElement('li')
+    dropdownItem.classList.add('dropdownItem');
+    dropdown.appendChild(dropdownItem)
+    document.body.appendChild(dropdown);
 
     function highlightLink() {
       const linkCoords = this.getBoundingClientRect()
@@ -53,9 +64,30 @@
       highlight.style.width = `${linkCoords.width}px`
       highlight.style.height = `${linkCoords.height}px`
       highlight.style.transform = `translate(${userCoords.left}px, ${userCoords.top}px)`
-    } 
+    }
+
+    function dropdownMenu() {
+      const linkCoords = this.getBoundingClientRect()
+      // this takes into account the scroll position and adjusts the span styling accordingly // 
+      const userCoords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX
+      }
+
+      dropdown.style.display = 'block'
+      dropdown.style.transform = `translate(${userCoords.left}px, ${userCoords.top}px`
+
+      console.log('dropdownMenu');
+    }
+
+    /* you go the menu items to move div to location on mouseenter and next you need to get it to include the height of the menu item so it shows below it.
+          Then you need to work on getting menu items into the list items (dropdownItem) within the <ul> (dropdown). 
 
     triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+    navItems.forEach(a => a.addEventListener('mouseenter', dropdownMenu)); // sets dropdown trigger for menu items only not all <a> like the highlighter //
+
 
   </script>
 </body>

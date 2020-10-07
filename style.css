@@ -45,6 +45,20 @@ a {
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
+.dropdown {
+  transition: all 0.2s; /* this allows it too look smooth instead of ugly snaps */
+  border-bottom: 2px solid white;
+  position: absolute;
+  top: 0;
+  background: white;
+  left: 0;
+  z-index: -1;
+  border-radius: 20px;
+  display: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  list-style: none;
+}
+
 .menu {
   padding: 0;
   display: flex;
