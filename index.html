@@ -72,18 +72,16 @@
       const userCoords = {
         width: linkCoords.width,
         height: linkCoords.height,
-        top: linkCoords.top + window.scrollY,
-        left: linkCoords.left + window.scrollX
+        top: (linkCoords.top + linkCoords.height) + window.scrollY,
+        left: (linkCoords.left + (linkCoords.width / 2) ) + window.scrollX
       }
 
       dropdown.style.display = 'block'
       dropdown.style.transform = `translate(${userCoords.left}px, ${userCoords.top}px`
-
-      console.log('dropdownMenu');
     }
 
-    /* you go the menu items to move div to location on mouseenter and next you need to get it to include the height of the menu item so it shows below it.
-          Then you need to work on getting menu items into the list items (dropdownItem) within the <ul> (dropdown). 
+    /* you got the menu items to move div to location on mouseenter and next you need to get it to include the height of the menu item so it shows below it.
+          Then you need to work on getting menu items into the list items (dropdownItem) within the <ul> (dropdown). */
 
     triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
     navItems.forEach(a => a.addEventListener('mouseenter', dropdownMenu)); // sets dropdown trigger for menu items only not all <a> like the highlighter //
