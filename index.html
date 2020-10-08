@@ -64,7 +64,7 @@
 
     function dropdownMenu() {
       const linkCoords = this.getBoundingClientRect()
-      // this takes into account the scroll position and adjusts the span styling accordingly // 
+      // this takes into account the scroll position && the menu item size then adjusts the span styling accordingly // 
       const userCoords = {
         width: linkCoords.width,
         height: linkCoords.height,
@@ -72,7 +72,7 @@
         left: (linkCoords.left - (linkCoords.width / 2)) + window.scrollX
       }
 
-      dropdown.style.display = 'flex'
+      dropdown.style.display = 'block'
       dropdown.style.transform = `translate(${userCoords.left}px, ${userCoords.top}px`
 
       const menuItemText = this.innerText
@@ -104,7 +104,7 @@
 
     triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
     navItems.forEach(a => a.addEventListener('mouseenter', dropdownMenu)); // sets dropdown trigger for menu items only not all <a> like the highlighter //
-
+    dropdown.addEventListener('mouseleave', () => dropdown.style.display = 'none')
 
   </script>
 </body>
