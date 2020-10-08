@@ -104,6 +104,7 @@
 
     triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
     navItems.forEach(a => a.addEventListener('mouseenter', dropdownMenu)); // sets dropdown trigger for menu items only not all <a> like the highlighter //
+    navItems.forEach(a => a.addEventListener('click', dropdownMenu));
     // dropdown.addEventListener('mouseenter', () => dropdown.style.display = 'block ')
     dropdown.addEventListener('mouseleave', () => dropdown.style.display = 'none')
 
