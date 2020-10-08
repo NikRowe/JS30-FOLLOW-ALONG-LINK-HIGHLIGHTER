@@ -44,14 +44,10 @@
     // drop down menu //
     const dropdown = document.createElement('ul');
     dropdown.classList.add('dropdown');
-    const dropdownItem = document.createElement('li')
-    dropdownItem.classList.add('dropdownItem');
-    dropdown.appendChild(dropdownItem)
     document.body.appendChild(dropdown);
 
     function highlightLink() {
       const linkCoords = this.getBoundingClientRect()
-      console.log(linkCoords);
       // this takes into account the scroll position and adjusts the span styling accordingly // 
       const userCoords = {
         width: linkCoords.width,
@@ -73,15 +69,38 @@
         width: linkCoords.width,
         height: linkCoords.height,
         top: (linkCoords.top + linkCoords.height) + window.scrollY,
-        left: (linkCoords.left + (linkCoords.width / 2) ) + window.scrollX
+        left: (linkCoords.left - (linkCoords.width / 2)) + window.scrollX
       }
 
-      dropdown.style.display = 'block'
+      dropdown.style.display = 'flex'
       dropdown.style.transform = `translate(${userCoords.left}px, ${userCoords.top}px`
-    }
 
-    /* you got the menu items to move div to location on mouseenter and next you need to get it to include the height of the menu item so it shows below it.
-          Then you need to work on getting menu items into the list items (dropdownItem) within the <ul> (dropdown). */
+      const menuItemText = this.innerText
+      menuItemText === 'Home'
+        ? dropdown.style.display = 'none'
+        : menuItemText === 'Order Status'
+          ? dropdown.innerHTML = `
+        <li class="dropdownItem"><a href=""> 🕗 Where's my order? </a></li>
+        <li class="dropdownItem"><a href=""> 💰 Cancellations & Refunds. </a></li>
+        <li class="dropdownItem second-row"><a href=""> 🔥 Order received but defective </a></li>
+        <li class="dropdownItem second-row"><a href=""> 💩 Order not received </a></li>
+    `
+          : menuItemText === 'Tweets'
+            ? dropdown.innerHTML = `
+        <li class="dropdownItem"><a href=""> 🐦 Stay up to date with our latest news! </a></li>
+    `
+            : menuItemText === 'Read Our History'
+              ? dropdown.innerHTML = `
+        <li class="dropdownItem"><a href=""> ⌛  How we came to be. </a></li>
+        <li class="dropdownItem"><a href=""> 🚀  Where we're going. </a></li>
+    `
+              : menuItemText === 'Contact Us'
+                ? dropdown.innerHTML = `
+      <li class="dropdownItem"><a href=""> 🍔  Lets talk over lunch! </a></li>
+      <li class="dropdownItem"><a href=""> 🍺  Grab a beer and pick my brain! </a></li>
+    `
+                : ''
+    }
 
     triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
     navItems.forEach(a => a.addEventListener('mouseenter', dropdownMenu)); // sets dropdown trigger for menu items only not all <a> like the highlighter //
